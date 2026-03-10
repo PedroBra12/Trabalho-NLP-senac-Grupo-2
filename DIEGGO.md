@@ -7,3 +7,41 @@ Adição de mais 3 PDFs com tamanho menor devido a falta de informações.
 
 ## 06 de março de 2026
 Extração dos textos dos PDFs utilizando PyMuPDF.
+
+## 09 de março de 2026
+Perguntas feitas sobre o texto "Manual SM-A15X_A16X_A17X_A06X_A075_16_Emb_BR_Rev.2.1"
+1. O que o Painel Edge faz?
+"Você pode acessar seus aplicativos favoritos e funções dos Painéis Edge."
+
+2. Quais as formas de bloqueio de tela?
+"Ao definir um Padrão, PIN, Senha ou seus dados biométricos como modo de bloqueio
+de tela"
+
+3. Quais os aplicativos para adquirir novos aplicativos?
+"Galaxy Store: Compre e baixe mais aplicativos... Play Store: Compre e baixe mais aplicativos..."
+
+4. Quais os modos de camêra?
+"Modo Foto Modo Vídeo Modo Retrato Modo Diversão Modo Pro Modo Panorâmica Modo Food Modo Noturno Modo Macro Modo Câmera lenta Modo Timelapse" Pgs 52 a 56
+
+5. O que acontece quando um número bloqueado me ligar?
+"Quando os números bloqueados tentarem ligar, você não receberá notificações. As chamadas serão registradas na lista."
+
+6. Quais ações podem ser feitas em um contato?
+"• : efetua uma chamada.
+• : envia uma mensagem.
+• : efetua uma videochamada.
+• : envia um e-mail."
+
+7. Onde verificar cartões compatíveis com o Samsung Wallet?
+"Você poderá verificar mais informações, tais como os cartões compatíveis com essa
+função no site www.samsung.com/samsung-wallet."
+
+8. Qual o aplicativo padrão para o envio de mensagens?
+"Samsung Messages"
+
+9. Quais as opções disponiveis no modo PRO?
+"ISO, SPEED, EV, FOCUS, WB" Pg 54
+
+10. O que é possivel de fazer no Samsung Notes?
+"Crie notas ao inserir um texto com o teclado ou ao escrever e desenhar na tela. Também
+é possível adicionar imagens e gravações de voz às suas notas."
