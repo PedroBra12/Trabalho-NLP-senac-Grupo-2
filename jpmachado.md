@@ -1,8 +1,8 @@
 ﻿# João Paulo Machado
-## 04/03/2026
+# 04/03/2026
 Este arquivo foi criado por mim para colocar meus commits do que fiz no dia
 
-## 05/03/2026
+# 05/03/2026
 adição de 3 novos pdfs de regras de futsal, operações matematicas e acentuação
 
 # 09/03/2026
@@ -35,5 +35,31 @@ adição de 3 novos pdfs de regras de futsal, operações matematicas e acentua�
 ### 6- Meu celular ta dando problema, como posso ajudar alguem pra resolver?
     Gerenciamento remoto
     Se você tiver alguma pergunta ou problema técnico referente ao seu aparelho, você poderá obter ajuda usando o serviço de suporte remoto. Na tela de configurações, toque em Gerenciamento remoto.
+----
+### 7- Oque eu faço quando meu celular esquentar demais enquanto carrega?
+    Desconecte o carregador do aparelho e feche quaisquer aplicativos em execução. Aguarde o aparelho resfriar e recomece a carregar.
+       • Se a parte inferior do aparelho aquecer, isso pode ser devido a um cabo USB danificado. Substitua o cabo USB por um novo. Recomenda-se o uso de um cabo
+    USB aprovado pela Samsung.
+       • Ao utilizar o carregador sem fio, não coloque materiais estranhos como objetos metálicos, ímãs e cartões com tarja magnética entre o aparelho e o carregador
+    sem fio.
+----
+### 8- Preciso me preocupar com o ambiente em que uso ou deixo o celular?
+    • Não utilize ou guarde seu aparelho em locais muito quentes ou muito frios.
+    • Não exponha o aparelho à luz solar direta por longos períodos.
+    • Não use ou guarde seu aparelho por muito tempo dentro de áreas muito quentes, tais como dentro de um carro no verão.
+    • Não coloque o aparelho em quaisquer áreas que possam superaquecer como objetos térmicos (tapete, colchão, cobertor etc.).
+    • Não utilize ou guarde seu aparelho próximo ou dentro de aquecedores, micro-ondas,  equipamentos de cozinha ou reservatórios de alta pressão.
+    • Não use um cabo que esteja desencapado ou danificado e não use qualquer carregador ou bateria que estejam danificados ou com mau funcionamento.
+----
+### 9- Como posso forçar um renicio quando meu celular travar?
+    Se o seu aparelho estiver travado e sem operação, mantenha as teclas Lateral e Diminuir volume pressionadas por mais de 7 segundos para reiniciá-lo.
+----
+### 10- Oque faço se o bluetooth não estiver funcionando?
+    Se outro aparelho Bluetooth não é localizado, houver problemas na conexão ou falhas de desempenho, tente o seguinte:
+       • Certifique-se de que o aparelho que deseja se conectar está pronto para ser procurado ou conectado.
+       • Certifique-se de que seu aparelho e o outro aparelho Bluetooth estão dentro do alcance máximo do Bluetooth (10 m).
+       • Em seu aparelho, abra o aplicativo Config., toque em Conexões e toque na opção Bluetooth para reativar.
+       • Em seu aparelho, abra o aplicativo Config. e toque em Gerenciamento geral → Restaurar → Restaurar configurações de Wi-Fi e Bluetooth → Redefinir configurações para redefinir as configurações de rede. Você poderá perder as informações registradas ao realizar a restauração
 
+# 10/03/2026
 
