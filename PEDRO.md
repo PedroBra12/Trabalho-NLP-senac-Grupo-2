@@ -9,3 +9,11 @@ Fiquei responsável por criar o repositório, e também configurei meu git no vs
 ### Buscando um material o qual o modelo irá ser treinado
 
 Busquei datasets diferentes porém não consegui baixar,
+
+## 09/03/2026
+
+### Criei as 10 perguntas e respostas
+
+## 10/03/2026
+
+### Teste de diferentes modelos
