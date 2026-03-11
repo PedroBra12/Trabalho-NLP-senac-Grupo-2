@@ -63,3 +63,4 @@ adição de 3 novos pdfs de regras de futsal, operações matematicas e acentua�
 
 # 10/03/2026
 
+terminei minhas perguntas que não tinha terminado ontem e comecei a fazer testes com o Sentence Transformer, fazendo testes com varios modelos diferentes desde de um modelo que era mestre so em portugues ate um modelo multi-lingual, e oque tive melhores resultados foi com o modelo multi-lingual ("intfloat/multilingual-e5-large") que acertou algumas similiaridade de pergunta e respostas
