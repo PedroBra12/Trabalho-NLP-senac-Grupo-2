@@ -13,6 +13,7 @@ Seguem 10 perguntas do PDF de nome: SM-A15X_A16X_A17X_A06X_A075_16_Emb_BR_Rev.2.
 9-	COMO CARREGAR A BATERIA DE FORMA LENTA? Página 16
 10-	POSSO UTILIZAR UM CABO MICRO USB PARA CARREGAR A BATERIA? Página 15
 As perguntas estão escritas no próprio documento e nas respetivas páginas
+
 ## 09 de março de 2026
 Seguem 5 perguntas díficeis geradas pelo chat gpt com as respectivas respostas:
 Perguntas difíceis:
@@ -124,4 +125,8 @@ DE QUE FORMA O CARTÃO DE MEMÓRIA PODE CAIR?                  | 0.7248         
 COMO CARREGAR A BATERIA DE FORMA LENTA?                      | 0.6085               | 0.8959              
 POSSO UTILIZAR UM CABO MICRO USB PARA CARREGAR A BATERIA?    | 0.7231               | 0.9707              
 ==========================================================================================
+
+## 11 de março de 2026
+Montei o código seguindo o passo-a-passo do link: https://docs.langchain.com/oss/python/langchain/knowledge-base#huggingface
+Parei no ítem 3, não fiz ainda esse.
 
