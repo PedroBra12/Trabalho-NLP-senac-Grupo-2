@@ -50,3 +50,6 @@ função no site www.samsung.com/samsung-wallet."
 Foi testado modelos com o 'sentenceTransformer':
 'all-MiniLM-L6-v2',
 'paraphrase-multilingual-MiniLM-L12-v2', 'paraphrase-multilingual-mpnet-base-v2'
+
+## 11 de março de 2026
+Começei a usar o LangChain.
