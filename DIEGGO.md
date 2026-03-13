@@ -45,3 +45,11 @@ função no site www.samsung.com/samsung-wallet."
 10. O que é possivel de fazer no Samsung Notes?
 "Crie notas ao inserir um texto com o teclado ou ao escrever e desenhar na tela. Também
 é possível adicionar imagens e gravações de voz às suas notas."
+
+## 10 de março de 2026
+Foi testado modelos com o 'sentenceTransformer':
+'all-MiniLM-L6-v2',
+'paraphrase-multilingual-MiniLM-L12-v2', 'paraphrase-multilingual-mpnet-base-v2'
+
+## 11 de março de 2026
+Começei a usar o LangChain.

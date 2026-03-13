@@ -13,6 +13,7 @@ Seguem 10 perguntas do PDF de nome: SM-A15X_A16X_A17X_A06X_A075_16_Emb_BR_Rev.2.
 9-	COMO CARREGAR A BATERIA DE FORMA LENTA? Página 16
 10-	POSSO UTILIZAR UM CABO MICRO USB PARA CARREGAR A BATERIA? Página 15
 As perguntas estão escritas no próprio documento e nas respetivas páginas
+
 ## 09 de março de 2026
 Seguem 5 perguntas díficeis geradas pelo chat gpt com as respectivas respostas:
 Perguntas difíceis:
@@ -106,4 +107,26 @@ Isso acontece porque o segundo chip pode:
 •	ter plano de dados diferente
 •	gerar tráfego fora do plano contratado.
 
+## 10 de março de 2026
+utilizei o arquivo PDF e o modelo Mini, e para cada uma das 10 perguntas acima, criei as similaridades e um quadro comparativo
+==========================================================================================
+Métricas de Similaridade - Comparação
+==========================================================================================
+Pergunta                                                     | MÉTRICA 1 (top sim)  | MÉTRICA 2 (top sim) 
+------------------------------------------------------------------------------------------
+DE QUE FORMA ACONTECE O ESGOTAMENTO DA BATERIA?              | 0.6904               | 0.7554              
+PROBLEMA DE CONECTIVIDADE OCORRE EM QUE SITUAÇÃO?            | 0.5997               | 0.9759              
+CONSIGO CARREGAR O MEU APARELHO E OUTRO APARELHO AO MESMO T  | 0.6587               | 0.9086              
+CONSIGO CONTROLA OUTROS APARELHOS PRÓXIMO SEM ESTAREM CONEC  | 0.6778               | 0.9648              
+A BARRA DE NAVEGAÇÃO PODE SER DESOCULTADA?                   | 0.6420               | 0.9213              
+CONSIGO FORMATAR O CARTÃO DE MEMÓRIA COM APARELHO DESLIGADO  | 0.7766               | 0.9361              
+A OPÇÃO DESMONTAR SERVE PARA ABRIR O APARELHO?               | 0.6968               | 0.7389              
+DE QUE FORMA O CARTÃO DE MEMÓRIA PODE CAIR?                  | 0.7248               | 0.9541              
+COMO CARREGAR A BATERIA DE FORMA LENTA?                      | 0.6085               | 0.8959              
+POSSO UTILIZAR UM CABO MICRO USB PARA CARREGAR A BATERIA?    | 0.7231               | 0.9707              
+==========================================================================================
+
+## 11 de março de 2026
+Montei o código seguindo o passo-a-passo do link: https://docs.langchain.com/oss/python/langchain/knowledge-base#huggingface
+Parei no ítem 3, não fiz ainda esse.
 
