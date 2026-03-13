@@ -130,3 +130,5 @@ POSSO UTILIZAR UM CABO MICRO USB PARA CARREGAR A BATERIA?    | 0.7231           
 Montei o código seguindo o passo-a-passo do link: https://docs.langchain.com/oss/python/langchain/knowledge-base#huggingface
 Parei no ítem 3, não fiz ainda esse.
 
+## 12 de março de 2026
+Continuei a partir do item 3 e fui até os retrieves. Coloquei as perguntas e foi gerados os scores.
