@@ -68,3 +68,7 @@ terminei minhas perguntas que não tinha terminado ontem e comecei a fazer teste
 # 16/03/2026
 
 tentei mexer na nova maquina virtual nossa e estava tentando baixar as coisas para conseguir fazer o codigo com sentenced transformers utilizando Retrieval, porem não consegui terminar de configurar a maquina ainda para fazer os teste no codigo
+
+# 17/03/2026
+
+fiz testes no colab usando o senteced transformers com o cross-encoder e a maioria dos resultados foram bons, porem teve alguns erros, onde ele dava o score mais alto para a resposta errada
