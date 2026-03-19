@@ -132,3 +132,6 @@ Parei no ítem 3, não fiz ainda esse.
 
 ## 12 de março de 2026
 Continuei a partir do item 3 e fui até os retrieves. Coloquei as perguntas e foi gerados os scores.
+
+## 16, 17, e 18 de março de 2026
+Continuei com a implementação do Embendding, Bi-encoder e Cross-Encoder carregando o meu documento.
