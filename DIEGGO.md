@@ -53,3 +53,18 @@ Foi testado modelos com o 'sentenceTransformer':
 
 ## 11 de março de 2026
 Começei a usar o LangChain.
+
+## 12 de março de 2026
+Faltei.
+
+## 13 de março de 2026
+Testes iniciais na maquina remota.
+
+## 16 de março de 2026
+Trabalho como assistente de TI para outros alunos.
+
+## 17 de março de 2026
+Faltei.
+
+## 18 de março de 2026
+Analise inicial de 2 codigos enviados pelo professor sobre langchain.
