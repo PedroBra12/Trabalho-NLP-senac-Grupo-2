@@ -68,3 +68,6 @@ Faltei.
 
 ## 18 de março de 2026
 Analise inicial de 2 codigos enviados pelo professor sobre langchain.
+
+## 19 de março de 2026
+Testando GitLens.
