@@ -135,3 +135,5 @@ Continuei a partir do item 3 e fui até os retrieves. Coloquei as perguntas e fo
 
 ## 16, 17, e 18 de março de 2026
 Continuei com a implementação do Embendding, Bi-encoder e Cross-Encoder carregando o meu documento.
+## 19 de março de 2026
+Implementei no meu código a parte da aula do dia 18.
