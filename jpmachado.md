@@ -76,3 +76,7 @@ fiz testes no colab usando o senteced transformers com o cross-encoder e a maior
 # 18/03/2026
 
 assisti a aula vendo o codigo do professor, e tentei aplicar no meu, porem sem sucesso
+
+# 23/03/2026
+
+tava configurando a maquina virtual certinho e consegui baixar o doccano nela para fazer testes depois

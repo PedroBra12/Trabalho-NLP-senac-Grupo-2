@@ -17,3 +17,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 10/03/2026
 
 ### Teste de diferentes modelos
+
+## 23/03/2026
+
+### Instalação do doccana bem como docker, testando docanna
