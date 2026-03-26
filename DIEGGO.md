@@ -71,3 +71,10 @@ Analise inicial de 2 codigos enviados pelo professor sobre langchain.
 
 ## 19 de março de 2026
 Testando GitLens.
+Implementado o codigo de nolegacy para ler um dos PDFs e testado alguns modelos. Pessimos resultados, começei a olhar para RAGs.
+
+## 24 de março de 2026
+Assitente de TI.
+
+## 25 de março de 2026
+Vibe coding hard no codigo de LangChain. Ainda não testado devido a problemas para usar o gervasio pela HF.
