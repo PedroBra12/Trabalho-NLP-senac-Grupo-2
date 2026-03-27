@@ -1,6 +1,8 @@
 {
   "name": "ML Workspace",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": { "dockerfile": "Dockerfile",
+           "context": ".."
+          },
 
   "runArgs": ["--gpus", "all"],
 

@@ -78,3 +78,6 @@ Assitente de TI.
 
 ## 25 de março de 2026
 Vibe coding hard no codigo de LangChain. Ainda não testado devido a problemas para usar o gervasio pela HF.
+
+## 26 de março de 2026
+Re criei o pipeline para tentar simplificar as coisas. Ainda falta algumas coisas.
