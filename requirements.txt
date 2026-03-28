@@ -1,3 +1,16 @@
-pandas
-scikit-learn
-transformers
+# ── Core RAG stack ────────────────────────────────────────────────────────────
+chromadb==0.6.3
+sentence-transformers==3.4.1
+ollama==0.4.7
+
+# ── GPU / tensor backend ──────────────────────────────────────────────────────
+# Install the CUDA 12.x build — matches the Dockerfile base image
+torch==2.6.0+cu124
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+# ── PDF ingestion ─────────────────────────────────────────────────────────────
+pymupdf==1.25.3
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+numpy==1.26.4
+tqdm==4.67.1
