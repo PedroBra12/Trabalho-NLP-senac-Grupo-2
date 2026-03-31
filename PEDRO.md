@@ -25,3 +25,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 27/03/2026
 
 ### feito as anotações no dataset no docanna
+
+## 30/03/2026
+
+### Feito main.py rodando localmente e na VM
