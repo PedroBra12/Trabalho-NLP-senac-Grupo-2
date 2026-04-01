@@ -83,4 +83,7 @@ Vibe coding hard no codigo de LangChain. Ainda não testado devido a problemas p
 Re criei o pipeline para tentar simplificar as coisas. Ainda falta algumas coisas.
 
 ## 27 de março de 2026 
-Finalizando de executar a pipeline, descobri uma forma mais simples para fazer em uma futura versão (LlamaIndex)
+Finalizando de executar a pipeline, descobri uma forma mais simples para fazer em uma futura versão (LlamaIndex).
+
+## 31 de março de 2026
+LlamaIndex funciona! Pega um PDF e pode validar com um um arquivo de golden Q&A ou responder questões sobre o PDF. Ainda tenho que testar o finetune_reranker.

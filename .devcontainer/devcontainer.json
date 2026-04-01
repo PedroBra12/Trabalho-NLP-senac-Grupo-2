@@ -1,32 +1,23 @@
 {
-  "name": "RAG Pipeline",
-  // ── Build from the project Dockerfile ──────────────────────────────────────
+  "name": "RAG Pipeline (LlamaIndex)",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
   },
-  // ── GPU access ─────────────────────────────────────────────────────────────
-  // Exposes all available GPUs to the container.
-  // Requires: nvidia-container-toolkit installed on the host.
   "runArgs": [
     "--gpus",
     "all",
     "--shm-size",
     "16g"
   ],
-  // ── Persistent mounts ──────────────────────────────────────────────────────
-  // ChromaDB index, documents, and Ollama weights survive container rebuilds.
   "mounts": [
     "source=rag-chromadb,target=/app/.chromadb,type=volume",
     "source=rag-ollama,target=/root/.ollama,type=volume",
     "source=${localWorkspaceFolder}/PDFs,target=/app/docs,type=bind,consistency=cached"
   ],
-  // ── Port forwarding ────────────────────────────────────────────────────────
-  // 11434 → Ollama REST API (useful for testing with curl or Postman)
   "forwardPorts": [
     11434
   ],
-  // ── VS Code extensions ─────────────────────────────────────────────────────
   "customizations": {
     "vscode": {
       "extensions": [
@@ -49,8 +40,7 @@
       }
     }
   },
-  // ── Post-create: pull Ollama model once the container is up ───────────────
-  "postCreateCommand": "ollama serve & sleep 3 && ollama pull qwen3:14b",
-  // ── Remote user ───────────────────────────────────────────────────────────
+  "postCreateCommand": "ollama serve & sleep 5 && ollama pull qwen3:14b",
+  "postStartCommand": "ollama serve & sleep 3",
   "remoteUser": "root"
 }

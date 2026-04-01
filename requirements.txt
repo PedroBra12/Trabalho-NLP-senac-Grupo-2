@@ -1,16 +1,23 @@
-# ── Core RAG stack ────────────────────────────────────────────────────────────
-chromadb==0.6.3
-sentence-transformers==3.4.1
-ollama==0.4.7
+# ── LlamaIndex core + integrations ───────────────────────────────────────────
+llama-index-core
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
+llama-index-vector-stores-chroma
+llama-index-readers-file
+
+# ── Vector store ──────────────────────────────────────────────────────────────
+chromadb
+
+# ── Embeddings + reranker ─────────────────────────────────────────────────────
+sentence-transformers
 
 # ── GPU / tensor backend ──────────────────────────────────────────────────────
-# Install the CUDA 12.x build — matches the Dockerfile base image
 torch==2.6.0+cu124
 --extra-index-url https://download.pytorch.org/whl/cu124
 
-# ── PDF ingestion ─────────────────────────────────────────────────────────────
-pymupdf==1.25.3
+# ── PDF parsing ───────────────────────────────────────────────────────────────
+pymupdf
 
 # ── Utilities ─────────────────────────────────────────────────────────────────
-numpy==1.26.4
-tqdm==4.67.1
+numpy
+tqdm
