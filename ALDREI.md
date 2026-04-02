@@ -142,3 +142,6 @@ Implementei no meu código a parte da aula do dia 18.
 Tentando instalar Docker na VM, porém sem sucesso.
 # 24 e 25 de março de 2026
 Com o pdf já definindo, construindo as métricas para o SPLIT e entendendo o porque (métrica quanti e qualitativa)
+
+# 24 e 25 de março & 01 de abril de 2026
+Fiz o fine tuning e tentando trabalhar com LORA
