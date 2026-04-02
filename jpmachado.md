@@ -88,3 +88,7 @@ usei muito do vibe codding e consegui fazer teste com um codigo LLM AS A JUDGE, 
 # 30/03/2026
 
 tentei fazer o fine-tuning com o modelo serafim-100m com a base do codigo do site, porem não consegui fazer as modificações necessarias e pedi ajuda ao LLM e então o codigo rodou e no primeiro segundo de treino  agpu ram estorou
+
+# 01/03/2026
+
+teste do codigo do professor do Lora no colab
