@@ -29,3 +29,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 30/03/2026
 
 ### Feito main.py rodando localmente e na VM
+
+## 01/04/2026
+
+### Teste de LoRA no colab
