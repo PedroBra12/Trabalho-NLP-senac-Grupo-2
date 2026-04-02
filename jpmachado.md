@@ -80,3 +80,11 @@ assisti a aula vendo o codigo do professor, e tentei aplicar no meu, porem sem s
 # 23/03/2026
 
 tava configurando a maquina virtual certinho e consegui baixar o doccano nela para fazer testes depois
+
+# 25/03/2026
+
+usei muito do vibe codding e consegui fazer teste com um codigo LLM AS A JUDGE, porem as metricas de avaliação dele estavam muito estranha, mas pelo menos estava funcionando, e algumas respostas estava certa
+
+# 30/03/2026
+
+tentei fazer o fine-tuning com o modelo serafim-100m com a base do codigo do site, porem não consegui fazer as modificações necessarias e pedi ajuda ao LLM e então o codigo rodou e no primeiro segundo de treino  agpu ram estorou

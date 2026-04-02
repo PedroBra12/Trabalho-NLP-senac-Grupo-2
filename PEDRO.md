@@ -21,3 +21,11 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 23/03/2026
 
 ### Instalação do doccana bem como docker, testando docanna
+
+## 27/03/2026
+
+### feito as anotações no dataset no docanna
+
+## 30/03/2026
+
+### Feito main.py rodando localmente e na VM

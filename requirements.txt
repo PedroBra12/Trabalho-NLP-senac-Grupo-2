@@ -1,0 +1,23 @@
+# ── LlamaIndex core + integrations ───────────────────────────────────────────
+llama-index-core
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
+llama-index-vector-stores-chroma
+llama-index-readers-file
+
+# ── Vector store ──────────────────────────────────────────────────────────────
+chromadb
+
+# ── Embeddings + reranker ─────────────────────────────────────────────────────
+sentence-transformers
+
+# ── GPU / tensor backend ──────────────────────────────────────────────────────
+torch==2.6.0+cu124
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+# ── PDF parsing ───────────────────────────────────────────────────────────────
+pymupdf
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+numpy
+tqdm

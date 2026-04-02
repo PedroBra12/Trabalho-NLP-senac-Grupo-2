@@ -71,3 +71,19 @@ Analise inicial de 2 codigos enviados pelo professor sobre langchain.
 
 ## 19 de março de 2026
 Testando GitLens.
+Implementado o codigo de nolegacy para ler um dos PDFs e testado alguns modelos. Pessimos resultados, começei a olhar para RAGs.
+
+## 24 de março de 2026
+Assitente de TI.
+
+## 25 de março de 2026
+Vibe coding hard no codigo de LangChain. Ainda não testado devido a problemas para usar o gervasio pela HF.
+
+## 26 de março de 2026
+Re criei o pipeline para tentar simplificar as coisas. Ainda falta algumas coisas.
+
+## 27 de março de 2026 
+Finalizando de executar a pipeline, descobri uma forma mais simples para fazer em uma futura versão (LlamaIndex).
+
+## 31 de março de 2026
+LlamaIndex funciona! Pega um PDF e pode validar com um um arquivo de golden Q&A ou responder questões sobre o PDF. Ainda tenho que testar o finetune_reranker.

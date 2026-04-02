@@ -1,0 +1,46 @@
+{
+  "name": "RAG Pipeline (LlamaIndex)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "runArgs": [
+    "--gpus",
+    "all",
+    "--shm-size",
+    "16g"
+  ],
+  "mounts": [
+    "source=rag-chromadb,target=/app/.chromadb,type=volume",
+    "source=rag-ollama,target=/root/.ollama,type=volume",
+    "source=${localWorkspaceFolder}/PDFs,target=/app/docs,type=bind,consistency=cached"
+  ],
+  "forwardPorts": [
+    11434
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-toolsai.jupyter",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "eamodio.gitlens",
+        "usernamehw.errorlens",
+        "oderwat.indent-rainbow"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3.11",
+        "editor.formatOnSave": true,
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "ollama serve & sleep 5 && ollama pull qwen3:14b",
+  "postStartCommand": "ollama serve & sleep 3",
+  "remoteUser": "root"
+}
