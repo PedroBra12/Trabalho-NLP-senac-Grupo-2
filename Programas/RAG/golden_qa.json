@@ -5,15 +5,15 @@
   },
   {
     "question": "Quais as formas de bloqueio de tela?",
-    "answer": "Ao definir um Padrão, PIN, Senha ou seus dados biométricos como modo de bloqueio de tela."
+    "answer": "Ao definir um Padrão, PIN, Senha ou seus dados biométricos como modo de bloqueio de tela, você pode proteger suas informações pessoais evitando que outras pessoas acessem seu aparelho."
   },
   {
     "question": "Quais os aplicativos para adquirir novos aplicativos?",
-    "answer": "Galaxy Store: Compre e baixe mais aplicativos. Play Store: Compre e baixe mais aplicativos."
+    "answer": "Galaxy Store: Compre e baixe mais aplicativos. Você pode baixar aplicativos especializados para aparelhos da linha Samsung Galaxy. Play Store: Compre e baixe mais aplicativos."
   },
   {
     "question": "Quais os modos de câmera?",
-    "answer": "Modo Foto, Modo Vídeo, Modo Retrato, Modo Diversão, Modo Pro, Modo Panorâmica, Modo Food, Modo Noturno, Modo Macro, Modo Câmera lenta, Modo Timelapse."
+    "answer": "Modo Foto: A câmera ajusta as opções de disparo automaticamente, dependendo dos arredores. Modo Vídeo: A câmera ajusta as opções de disparo automaticamente dependendo dos arredores. Modo Retrato: você pode tirar fotos onde o fundo da imagem é desfocado e o objeto/cena se destaca claramente. Modo Diversão: Tire fotos ou grave vídeos com vários efeitos. Modo Pro: Tire fotos enquanto ajusta manualmente várias opções de disparo como valor de exposição e ISO. Modo Panorâmica: Use este modo para tirar uma série de fotos e junte-as para criar um cenário panorâmico. Modo Food: Tire fotos de seus pratos com cores mais vibrantes. Modo Noturno: Tire fotos em condições com pouca iluminação sem utilizar o flash. Modo Macro: Tire fotos a uma curta distância. Modo Câmera lenta: Grave um vídeo para acessar em câmera lenta. Modo Timelapse: Grave cenas de pessoas passando ou carros trafegando, e assista os vídeos de forma acelerada."
   },
   {
     "question": "O que acontece quando um número bloqueado me ligar?",
@@ -21,7 +21,7 @@
   },
   {
     "question": "Quais ações podem ser feitas em um contato?",
-    "answer": "Efetuar uma chamada, enviar uma mensagem, efetuar uma videochamada e enviar um e-mail."
+    "answer": "Toque no contato. Em seguida, faça uma das seguintes ações: efetua uma chamada, envia uma mensagem, efetua uma videochamada, envia um e-mail."
   },
   {
     "question": "Onde verificar cartões compatíveis com o Samsung Wallet?",
@@ -29,11 +29,11 @@
   },
   {
     "question": "Qual o aplicativo padrão para o envio de mensagens?",
-    "answer": "Samsung Messages."
+    "answer": "Enviar mensagens (Samsung Messages)."
   },
   {
     "question": "Quais as opções disponíveis no modo PRO?",
-    "answer": "ISO, SPEED, EV, FOCUS, WB."
+    "answer": "ISO: seleciona um valor de ISO. SPEED: ajusta a velocidade do disparo. EV: ajusta o valor de exposição. FOCUS: altera o modo de foco. WB: seleciona um controle do branco apropriado para que as imagens tenham uma diversidade de cores realistas."
   },
   {
     "question": "O que é possível fazer no Samsung Notes?",
