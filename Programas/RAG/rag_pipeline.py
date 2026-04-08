@@ -2,11 +2,15 @@
 RAG Pipeline — LlamaIndex + ChromaDB + Ollama
 ==============================================
 Models:
-  Embeddings : BAAI/bge-m3            (~2 GB VRAM, via HuggingFace)
-               PORTULAN/serafim-100m-portuguese-pt-sentence-encoder-ir (~416 MB, via HuggingFace)
-  Reranker   : ms-marco-MiniLM-L-6-v2 (~90 MB, via HuggingFace)
-               unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2 (~408 MB, via HuggingFace)
-  LLM        : qwen3:14b              (~9 GB VRAM, via Ollama)
+  Embeddings :  BAAI/bge-m3            (~2 GB VRAM, via HuggingFace)
+                PORTULAN/serafim-100m-portuguese-pt-sentence-encoder-ir (~416 MB, via HuggingFace)
+                PORTULAN/serafim-335m-portuguese-pt-sentence-encoder-ir (~1276 MB, via HuggingFace)
+  Reranker   :  ms-marco-MiniLM-L-6-v2 (~90 MB, via HuggingFace)
+                unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2 (~408 MB, via HuggingFace)
+                unicamp-dl/mt5-base-en-pt-msmarco-v2 (~1489 MB, via HuggingFace)
+  LLM        :  qwen3:14b                 (~9 GB VRAM, via Ollama)
+                gemma4:e4b                (~3.6 GB VRAM, via Ollama)
+                gemma4:26b                (~16 GB VRAM, via Ollama)
 
 Usage:
   python rag_pipeline.py                        # demo with sample text
@@ -40,9 +44,9 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
-EMBED_MODEL = "PORTULAN/serafim-100m-portuguese-pt-sentence-encoder-ir"  # "BAAI/bge-m3"
-RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"  # "cross-encoder/ms-marco-MiniLM-L-6-v2"
-OLLAMA_MODEL = "qwen3:14b"
+EMBED_MODEL = "PORTULAN/serafim-335m-portuguese-pt-sentence-encoder-ir"
+RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"
+OLLAMA_MODEL = "gemma4:e4b"
 CHUNK_SIZE = 1024
 CHUNK_OVERLAP = 200
 RETRIEVAL_K = 20  # candidates before reranking
@@ -182,7 +186,7 @@ def _token_f1(pred: str, ref: str) -> float:
 def _semantic_similarity(pred: str, ref: str) -> float:
     from sentence_transformers import SentenceTransformer
 
-    model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
+    model = SentenceTransformer("all-MiniLM-L6-v2", device=DEVICE)
     embeddings = model.encode([pred, ref], convert_to_tensor=True)
     sim = torch.nn.functional.cosine_similarity(
         embeddings[0].unsqueeze(0), embeddings[1].unsqueeze(0)

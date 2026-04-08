@@ -87,3 +87,9 @@ Finalizando de executar a pipeline, descobri uma forma mais simples para fazer e
 
 ## 31 de março de 2026
 LlamaIndex funciona! Pega um PDF e pode validar com um um arquivo de golden Q&A ou responder questões sobre o PDF. Ainda tenho que testar o finetune_reranker.
+
+## 1 de abril de 2026
+Inicio nos estudos sobre LoRAs e adaptando para rodar no vs da maquina virtual.
+
+## 6 de abril de 2026
+Testando modelos mais pesados, como serafim 335 e gemma 4. Começei a olhar para Gradio por ser a forma mais facil.
