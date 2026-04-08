@@ -15,7 +15,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
 
 # Ollama
-RUN curl -fsSL https://ollama.com/install.sh | sh
+RUN curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.20.3 sh
 
 WORKDIR /app
 COPY requirements.txt .

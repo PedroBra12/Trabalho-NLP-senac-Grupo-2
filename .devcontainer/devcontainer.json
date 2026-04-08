@@ -16,7 +16,8 @@
     "source=${localWorkspaceFolder}/PDFs,target=/app/docs,type=bind,consistency=cached"
   ],
   "forwardPorts": [
-    11434
+    11434,
+    7860
   ],
   "customizations": {
     "vscode": {
@@ -40,7 +41,7 @@
       }
     }
   },
-  "postCreateCommand": "ollama serve & sleep 5 && ollama pull qwen3:14b",
+  "postCreateCommand": "ollama serve & sleep 5 && ollama pull gemma4:e4b",
   "postStartCommand": "ollama serve & sleep 3",
   "remoteUser": "root"
 }
