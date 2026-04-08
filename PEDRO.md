@@ -33,3 +33,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 01/04/2026
 
 ### Teste de LoRA no colab
+
+## 07/04/2026
+
+### Feito rag com langchain apresentou resultados satisfatórios em dúvida de qual ferramenta usar para o front
