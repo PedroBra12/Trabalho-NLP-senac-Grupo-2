@@ -145,3 +145,6 @@ Com o pdf já definindo, construindo as métricas para o SPLIT e entendendo o po
 
 # 24 e 25 de março & 01 de abril de 2026
 Fiz o fine tuning e tentando trabalhar com LORA
+
+# 06 e 07 de abril de 2026
+Tentando melhorar o modelo, na VM.
