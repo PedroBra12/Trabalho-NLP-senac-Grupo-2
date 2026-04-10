@@ -42,6 +42,5 @@
     }
   },
   "postCreateCommand": "ollama serve & sleep 5 && ollama pull gemma4:e4b",
-  "postStartCommand": "ollama serve & sleep 3",
   "remoteUser": "root"
 }
