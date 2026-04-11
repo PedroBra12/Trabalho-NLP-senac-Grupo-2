@@ -17,11 +17,12 @@ Usage:
 """
 
 import re
-import gc
 import json
 import torch
 import argparse
 import chromadb
+import shutil
+import gradio as gr
 from pathlib import Path
 
 from llama_index.core import (
@@ -36,31 +37,39 @@ from llama_index.core.postprocessor import SentenceTransformerRerank
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 from llama_index.vector_stores.chroma import ChromaVectorStore
+from llama_index.readers.file import PyMuPDFReader
+from llama_index.core.indices.query.query_transform import HyDEQueryTransform
+from llama_index.core.query_engine import TransformQueryEngine
+from sentence_transformers import SentenceTransformer
+import subprocess
 
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
+
 EMBED_MODEL = "PORTULAN/serafim-335m-portuguese-pt-sentence-encoder-ir"
 RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"
 OLLAMA_MODEL = "gemma4:e4b"
-CHUNK_SIZE = 1536
-CHUNK_OVERLAP = 300
-RETRIEVAL_K = 30  # candidates before reranking
-TOP_K = 8  # chunks passed to LLM after reranking
+CHUNK_SIZE = 512
+CHUNK_OVERLAP = 100
+RETRIEVAL_K = 50  # candidates before reranking
+TOP_K = 10  # chunks passed to LLM after reranking
 PDF_PATH = None  # set to None to skip
-GOLDEN_PATH = None  # set to None to skip eval
+GOLDEN_PATH = Path(__file__).parent / "golden_qa.json"
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 SYSTEM_PROMPT = """\
-Você é um assistente prestativo e detalhado. Responda à pergunta do usuário usando APENAS \
-o contexto fornecido abaixo. Forneça respostas completas e abrangentes, incluindo todos os \
-detalhes relevantes do contexto. Se houver passos ou instruções, liste-os claramente. \
-Se a resposta não estiver no contexto, diga isso honestamente. Responda no mesmo idioma da pergunta.
+Você é um assistente especializado no manual do dispositivo Samsung. \
+Responda à pergunta usando APENAS o contexto fornecido. \
+O contexto contém trechos do manual — a resposta ESTÁ lá, encontre-a. \
+Liste todos os itens relevantes encontrados. \
+Seja direto e completo. Responda em português.\
 """
 
 
 # ─── LlamaIndex global settings ───────────────────────────────────────────────
+
 
 Settings.embed_model = HuggingFaceEmbedding(
     model_name=EMBED_MODEL,
@@ -74,7 +83,7 @@ Settings.llm = Ollama(
     temperature=0.3,  # Slightly higher for more creativity (0.0-1.0)
     context_window=8192,  # Larger context window if your model supports it
     additional_kwargs={
-        "num_predict": 512,  # Max tokens to generate (increase for longer answers)
+        "num_predict": 2000,  # Max tokens to generate (increase for longer answers)
         "top_k": 40,
         "top_p": 0.9,
     },
@@ -84,10 +93,27 @@ Settings.text_splitter = SentenceSplitter(
     chunk_overlap=CHUNK_OVERLAP,
 )
 
+subprocess.run(["ollama", "pull", OLLAMA_MODEL], check=True)
+
 
 # ─── ChromaDB + VectorStore ───────────────────────────────────────────────────
 
+
 chroma_client = chromadb.PersistentClient(path="./.chromadb")
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--reset-db", action="store_true", help="Limpa o ChromaDB antes de iniciar"
+)
+args = parser.parse_args()
+
+if args.reset_db:
+    try:
+        chroma_client.delete_collection("rag_docs")
+        print("🗑️ ChromaDB resetado.")
+    except Exception:
+        pass  # collection didn't exist yet
+
 chroma_collection = chroma_client.get_or_create_collection("rag_docs")
 vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
@@ -99,7 +125,19 @@ index = VectorStoreIndex.from_vector_store(
 )
 
 
+def reset_db() -> str:
+    global _query_engine
+    try:
+        chroma_client.delete_collection("rag_docs")
+        chroma_client.get_or_create_collection("rag_docs")
+        _query_engine = None
+        return "🗑️ ChromaDB resetado com sucesso."
+    except Exception as e:
+        return f"❌ Erro: {e}"
+
+
 # ─── Reranker ─────────────────────────────────────────────────────────────────
+
 
 reranker = SentenceTransformerRerank(
     model=RERANK_MODEL,
@@ -114,45 +152,71 @@ def index_text(text: str, doc_id: str = "manual"):
     """Index a raw string."""
     doc = Document(text=text, metadata={"source": doc_id})
     index.insert(doc)
+    _query_engine = None  # invalidate cache
     print(f"  Indexed text from '{doc_id}'")
 
 
+def _already_indexed(filename: str) -> bool:
+    results = chroma_collection.get(where={"file_name": filename}, limit=1)
+    return len(results["ids"]) > 0
+
+
 def index_pdf(path: str | Path):
-    """Index a single PDF file."""
-    docs = SimpleDirectoryReader(input_files=[str(path)]).load_data()
+    global _query_engine
+    name = Path(path).name
+    if _already_indexed(name):
+        print(f"  Skipping '{name}' — already indexed")
+        return
+    loader = PyMuPDFReader()
+    docs = loader.load(file_path=str(path))
+    # tag source for dedup
     for doc in docs:
-        index.insert(doc)
-    print(f"  Indexed {len(docs)} pages from '{Path(path).name}'")
+        doc.metadata["file_name"] = name
+    nodes = _splitter.get_nodes_from_documents(docs)
+    index.insert_nodes(nodes)
+    _query_engine = None
+    print(f"  Indexed {len(nodes)} nodes from '{name}'")
+
+
+_splitter = SentenceSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
 
 
 def index_directory(directory: str | Path):
-    """Index all PDFs in a directory."""
+    global _query_engine
     docs = SimpleDirectoryReader(
         input_dir=str(directory),
         required_exts=[".pdf"],
         recursive=True,
     ).load_data()
-    for doc in docs:
-        index.insert(doc)
-    print(f"  Indexed {len(docs)} pages from '{directory}'")
+    nodes = _splitter.get_nodes_from_documents(docs)
+    index.insert_nodes(nodes)
+    _query_engine = None
+    print(f"  Indexed {len(nodes)} nodes from '{directory}'")
 
 
 # ─── Query engine ─────────────────────────────────────────────────────────────
 
+_query_engine = None
 
-def make_query_engine():
-    return index.as_query_engine(
-        similarity_top_k=RETRIEVAL_K,
-        node_postprocessors=[reranker],
-        response_mode="compact",
-    )
+
+def get_query_engine():
+    global _query_engine
+    if _query_engine is None:
+        base_engine = index.as_query_engine(
+            similarity_top_k=RETRIEVAL_K,
+            node_postprocessors=[reranker],
+            response_mode="compact",
+        )
+        hyde = HyDEQueryTransform(include_original=True)
+        _query_engine = TransformQueryEngine(base_engine, hyde)
+    return _query_engine
 
 
 # ─── Ask ──────────────────────────────────────────────────────────────────────
 
 
 def ask(query: str, verbose: bool = False) -> str:
-    engine = make_query_engine()
+    engine = get_query_engine()
     response = engine.query(query)
     if verbose:
         print(f"\n── Source chunks used ──────────────────────────────────")
@@ -185,16 +249,22 @@ def _token_f1(pred: str, ref: str) -> float:
     return round(2 * precision * recall / (precision + recall), 4)
 
 
-def _semantic_similarity(pred: str, ref: str) -> float:
-    from sentence_transformers import SentenceTransformer
+_eval_model = None
 
-    model = SentenceTransformer("all-MiniLM-L6-v2", device=DEVICE)
+
+def _get_eval_model():
+    global _eval_model
+    if _eval_model is None:
+        _eval_model = SentenceTransformer(EMBED_MODEL, device=DEVICE)
+    return _eval_model
+
+
+def _semantic_similarity(pred: str, ref: str) -> float:
+    model = _get_eval_model()
     embeddings = model.encode([pred, ref], convert_to_tensor=True)
     sim = torch.nn.functional.cosine_similarity(
         embeddings[0].unsqueeze(0), embeddings[1].unsqueeze(0)
     ).item()
-    del model
-    gc.collect()
     return round(float(sim), 4)
 
 
@@ -238,11 +308,8 @@ def run_golden_eval(golden_path: str | Path, verbose: bool = True) -> list[dict]
 
 # ─── CLI ──────────────────────────────────────────────────────────────────────
 
-if __name__ == "__main__":
-    import shutil
-    import gradio as gr
-    from pathlib import Path
 
+if __name__ == "__main__":
     DOCS_DIR = Path("./docs")
     DOCS_DIR.mkdir(exist_ok=True)
 
@@ -251,20 +318,38 @@ if __name__ == "__main__":
             return ""
         return ask(message, verbose=False)
 
-    def upload_pdfs(files) -> str:
-        if not files:
-            return "Nenhum arquivo enviado."
-        indexed = []
-        for f in files:
-            dest = DOCS_DIR / Path(f.name).name
-            shutil.copy(f.name, dest)
-            index_pdf(dest)
-            indexed.append(dest.name)
-        return f"✅ Indexado(s): {', '.join(indexed)}"
+    def upload_files(pdfs, json_file) -> str:
+        msgs = []
+
+        # Handle PDFs
+        if pdfs:
+            indexed, skipped = [], []
+            for f in pdfs:
+                dest = DOCS_DIR / Path(f.name).name
+                shutil.copy(f.name, dest)
+                before = _already_indexed(dest.name)
+                index_pdf(dest)
+                (skipped if before else indexed).append(dest.name)
+            if indexed:
+                msgs.append(f"✅ PDFs indexados: {', '.join(indexed)}")
+            if skipped:
+                msgs.append(f"⚠️ Já existiam: {', '.join(skipped)}")
+
+        # Handle golden JSON
+        if json_file:
+            dest = Path(__file__).parent / "golden_qa.json"
+            shutil.copy(json_file.name, dest)
+            try:
+                data = json.loads(dest.read_text(encoding="utf-8"))
+                msgs.append(f"✅ Golden Q&A carregado: {len(data)} pares")
+            except Exception as e:
+                msgs.append(f"❌ JSON inválido: {e}")
+
+        return "\n".join(msgs) if msgs else "Nenhum arquivo enviado."
 
     def run_eval() -> str:
-        if not GOLDEN_PATH or not Path(GOLDEN_PATH).exists():
-            return "❌ golden_qa.json não encontrado."
+        if not Path(GOLDEN_PATH).exists():
+            return "❌ Nenhum golden_qa.json encontrado. Envie um na aba de indexação."
         results = run_golden_eval(GOLDEN_PATH, verbose=False)
         em = sum(r["metrics"]["exact_match"] for r in results)
         f1 = sum(r["metrics"]["token_f1"] for r in results) / len(results)
@@ -330,7 +415,7 @@ if __name__ == "__main__":
                     return "", chat_history
 
                 def clear_chat():
-                    return [], []
+                    return []
 
                 def retry_last(chat_history):
                     if chat_history and len(chat_history) >= 2:
@@ -367,19 +452,27 @@ if __name__ == "__main__":
                     return chat_history
 
                 msg.submit(respond, [msg, chatbot], [msg, chatbot])
-                clear.click(clear_chat, None, [chatbot])
+                clear.click(clear_chat, None, chatbot)
                 retry.click(retry_last, chatbot, chatbot)
                 undo.click(undo_last, chatbot, chatbot)
 
-            with gr.Tab("📄 Indexar PDFs"):
+            with gr.Tab("📄 Gerenciamento de arquivos"):
                 pdf_upload = gr.File(
-                    label="Selecione PDFs", file_types=[".pdf"], file_count="multiple"
+                    label="PDFs", file_types=[".pdf"], file_count="multiple"
                 )
-                upload_btn = gr.Button("📥 Indexar", variant="primary")
+                json_upload = gr.File(
+                    label="Golden Q&A (JSON)", file_types=[".json"], file_count="single"
+                )
+                upload_btn = gr.Button("📥 Enviar", variant="primary")
                 upload_status = gr.Textbox(label="Status", interactive=False)
                 upload_btn.click(
-                    fn=upload_pdfs, inputs=pdf_upload, outputs=upload_status
+                    fn=upload_files,
+                    inputs=[pdf_upload, json_upload],
+                    outputs=upload_status,
                 )
+                reset_btn = gr.Button("🗑️ Resetar ChromaDB", variant="stop")
+                reset_status = gr.Textbox(label="Status reset", interactive=False)
+                reset_btn.click(fn=reset_db, inputs=None, outputs=reset_status)
             with gr.Tab("📊 Avaliação Golden Q&A"):
                 eval_btn = gr.Button("▶️ Executar avaliação", variant="primary")
                 eval_output = gr.Markdown()

@@ -93,3 +93,6 @@ Inicio nos estudos sobre LoRAs e adaptando para rodar no vs da maquina virtual.
 
 ## 6 de abril de 2026
 Testando modelos mais pesados, como serafim 335 e gemma 4. Começei a olhar para Gradio por ser a forma mais facil.
+
+## 10 de abril de 2026
+Procurando ideias sobre como rodar isso mais rapido, 10 segundos por resposta não da.
