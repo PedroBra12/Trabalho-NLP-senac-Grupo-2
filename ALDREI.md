@@ -149,5 +149,8 @@ Fiz o fine tuning e tentando trabalhar com LORA
 # 06 e 07 de abril de 2026
 Tentando melhorar o modelo, na VM.
 
-# 08 e 08 de abril de 2026
+# 08 e 09 de abril de 2026
 Tentando melhorar o modelo, na VM.
+
+# 10 de abril de 2026
+Tentando melhorar o modelo, na VM. Melhorando o LLM AS A JUDGE
