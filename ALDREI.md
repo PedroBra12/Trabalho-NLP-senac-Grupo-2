@@ -154,3 +154,6 @@ Tentando melhorar o modelo, na VM.
 
 # 10 de abril de 2026
 Tentando melhorar o modelo, na VM. Melhorando o LLM AS A JUDGE
+
+# 13 de abril de 2026
+Tentando melhorar o modelo, na VM. Melhorando o LLM AS A JUDGE
