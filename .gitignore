@@ -1,0 +1,6 @@
+.venv/
+.chromadb/
+.chromadb_lang/
+__pycache__/
+Programas/chroma_langchain_db/
+Programas/Professor/chroma_langchain_db/
