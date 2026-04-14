@@ -96,3 +96,7 @@ teste do codigo do professor do Lora no colab
 # 07/04/2026
 
 com a ajuda dos meus colegas de time, eu consegui rodar o RAG
+
+# 13/04/2026
+
+consegui fazer a interface do meu agente de respostas, usando o gradio, e ele estava respondendo tudo certinho, direto e facil
