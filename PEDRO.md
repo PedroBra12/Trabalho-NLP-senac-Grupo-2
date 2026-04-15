@@ -37,3 +37,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 07/04/2026
 
 ### Feito rag com langchain apresentou resultados satisfatórios em dúvida de qual ferramenta usar para o front
+
+## 14/04/2026
+
+### Estudo fast api com replit

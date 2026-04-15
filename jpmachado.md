@@ -100,3 +100,7 @@ com a ajuda dos meus colegas de time, eu consegui rodar o RAG
 # 13/04/2026
 
 consegui fazer a interface do meu agente de respostas, usando o gradio, e ele estava respondendo tudo certinho, direto e facil
+
+# 14/04/2026
+
+estudei um pouco sobre o fastAPI, pra que serve e como usava mas apesar de entender pra que serve usar sempre é mais complicado
