@@ -96,3 +96,6 @@ Testando modelos mais pesados, como serafim 335 e gemma 4. Começei a olhar para
 
 ## 10 de abril de 2026
 Procurando ideias sobre como rodar isso mais rapido, 10 segundos por resposta não da.
+
+## 14 de abril de 2026
+Testando modelos menores para poder rodar embedding de audio + habilidade de envio de audio como pergunta.

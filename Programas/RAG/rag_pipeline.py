@@ -9,8 +9,10 @@ Models:
                 unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2 (~408 MB, via HuggingFace)
                 unicamp-dl/mt5-base-en-pt-msmarco-v2 (~1489 MB, via HuggingFace)
   LLM        :  qwen3:14b                 (~9 GB VRAM, via Ollama)
+                gemma4:e2b                (~1.8 GB VRAM, via Ollama)
                 gemma4:e4b                (~3.6 GB VRAM, via Ollama)
                 gemma4:26b                (~16 GB VRAM, via Ollama)
+                brunoconterato/Gemma-3-Gaia-PT-BR-4b-it:f16 (~2.5 GB VRAM, via Ollama)
 
 Usage:
     1. Run `python rag_pipeline.py` to start the Gradio interface.
@@ -23,6 +25,7 @@ import argparse
 import chromadb
 import shutil
 import gradio as gr
+import subprocess
 from pathlib import Path
 
 from llama_index.core import (
@@ -41,15 +44,14 @@ from llama_index.readers.file import PyMuPDFReader
 from llama_index.core.indices.query.query_transform import HyDEQueryTransform
 from llama_index.core.query_engine import TransformQueryEngine
 from sentence_transformers import SentenceTransformer
-import subprocess
 
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
 
-EMBED_MODEL = "PORTULAN/serafim-335m-portuguese-pt-sentence-encoder-ir"
+EMBED_MODEL = "PORTULAN/serafim-100m-portuguese-pt-sentence-encoder-ir"
 RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"
-OLLAMA_MODEL = "gemma4:e4b"
+OLLAMA_MODEL = "gemma4:e2b"
 CHUNK_SIZE = 512
 CHUNK_OVERLAP = 100
 RETRIEVAL_K = 50  # candidates before reranking
@@ -78,7 +80,7 @@ Settings.embed_model = HuggingFaceEmbedding(
 Settings.llm = Ollama(
     model=OLLAMA_MODEL,
     request_timeout=600.0,
-    keep_alive="10m",
+    keep_alive="-1m",  # Negative value means to keep alive indefinitely (until manually killed or system restarts)
     system_prompt=SYSTEM_PROMPT,
     temperature=0.3,  # Slightly higher for more creativity (0.0-1.0)
     context_window=8192,  # Larger context window if your model supports it
