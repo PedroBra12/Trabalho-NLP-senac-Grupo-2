@@ -51,7 +51,7 @@ from sentence_transformers import SentenceTransformer
 
 EMBED_MODEL = "PORTULAN/serafim-100m-portuguese-pt-sentence-encoder-ir"
 RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"
-OLLAMA_MODEL = "gemma4:e2b"
+OLLAMA_MODEL = "qwen3:14b"
 CHUNK_SIZE = 512
 CHUNK_OVERLAP = 100
 RETRIEVAL_K = 50  # candidates before reranking

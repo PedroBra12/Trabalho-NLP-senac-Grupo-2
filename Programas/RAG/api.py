@@ -19,6 +19,7 @@ from pydantic import BaseModel
 # Garante que o diretório do pipeline está no path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rag_lang_pipeline as rag
+from rag_react_pipeline import ask_react
 
 # ─── FastAPI app ──────────────────────────────────────────────────────────────
 
@@ -79,6 +80,20 @@ class EvalResponse(BaseModel):
 
 class MessageResponse(BaseModel):
     message: str
+
+
+class ReactStep(BaseModel):
+    thought: str
+    action: str
+    action_input: str
+    observation: str
+
+
+class ReactAskResponse(BaseModel):
+    answer: str
+    steps: list[ReactStep]
+    fallback_used: bool
+    error: str | None = None
 
 
 # ─── Endpoints ────────────────────────────────────────────────────────────────
@@ -196,6 +211,19 @@ def run_eval():
         exact_match_pct=round(100 * em_sum / total, 1) if total else 0,
         avg_token_f1=round(f1_avg, 4),
         avg_semantic_sim=round(sim_avg, 4),
+    )
+
+
+@app.post("/ask-react", response_model=ReactAskResponse)
+def ask_react_endpoint(req: AskRequest):
+    """Faz uma pergunta usando o agente ReAct (raciocinio passo a passo)."""
+    result = ask_react(req.query, verbose=False)
+    steps = [ReactStep(**s) for s in result["steps"]]
+    return ReactAskResponse(
+        answer=result["answer"],
+        steps=steps,
+        fallback_used=result["error"] is not None,
+        error=result["error"],
     )
 
 
