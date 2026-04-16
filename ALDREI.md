@@ -160,3 +160,6 @@ Tentando melhorar o modelo, na VM. Melhorando o LLM AS A JUDGE
 
 # 14 de abril de 2026
 Tentando melhorar o modelo, na VM. Melhorando com modelos mais fortes.
+
+# 15 de abril de 2026
+Modelo melhorado com modelos mais fortes. Próxima aula fazer o streamlit + fast api
