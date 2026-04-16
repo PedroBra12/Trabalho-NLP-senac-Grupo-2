@@ -16,10 +16,11 @@ sentencepiece==0.2.1
 torch==2.6.0+cu124
 --extra-index-url https://download.pytorch.org/whl/cu124
 
-# ── PDF parsing ───────────────────────────────────────────────────────────────
-PyMuPDF==1.27.2.2
+# ── Document parsing ──────────────────────────────────────────────────────────
+docling==2.36.0
 
 # ── Utilities ─────────────────────────────────────────────────────────────────
 numpy==2.2.6
 tqdm==4.67.3
 gradio==6.11.0
+Pillow==11.2.1

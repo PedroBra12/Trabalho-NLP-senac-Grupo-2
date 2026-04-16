@@ -8,6 +8,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         git \
         zstd \
+        ffmpeg \
+        libsm6 \
+        libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
 # pip into python3.11
