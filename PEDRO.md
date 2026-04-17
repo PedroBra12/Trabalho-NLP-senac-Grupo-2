@@ -41,3 +41,7 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 14/04/2026
 
 ### Estudo fast api com replit
+
+## 15/04/2026
+
+### Feito FastApi com replit e ReAct

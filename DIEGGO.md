@@ -99,3 +99,6 @@ Procurando ideias sobre como rodar isso mais rapido, 10 segundos por resposta n√
 
 ## 14 de abril de 2026
 Testando modelos menores para poder rodar embedding de audio + habilidade de envio de audio como pergunta.
+
+## 15 de abril de 2026
+Investigando docling e outras formas melhores de melhorar.

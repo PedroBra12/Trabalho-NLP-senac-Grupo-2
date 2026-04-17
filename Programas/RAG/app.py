@@ -64,6 +64,20 @@ with st.sidebar:
 
     st.divider()
 
+    # ── Modo ──────────────────────────────────────────────────────────────────
+    st.header("Modo")
+    modo_rag = st.radio(
+        "Selecione o modo:",
+        ["RAG Simples", "ReAct Agent"],
+        index=0,
+        help=(
+            "RAG Simples: busca + resposta direta. "
+            "ReAct: agente com raciocinio passo a passo."
+        ),
+    )
+
+    st.divider()
+
     # ── Upload PDF ────────────────────────────────────────────────────────────
     st.header("Upload PDF")
     uploaded_file = st.file_uploader("Selecione um PDF", type=["pdf"])
@@ -189,6 +203,19 @@ for msg in st.session_state.messages:
                         f"**[{i}]** `{src['source']}` (score: {score_str})"
                     )
                     st.caption(src["content"][:300])
+        if msg.get("mode") == "react" and msg.get("steps"):
+            with st.expander("Raciocinio do Agente (ReAct)"):
+                for i, step in enumerate(msg["steps"], 1):
+                    st.markdown(f"**Passo {i}**")
+                    st.markdown(f"**Pensamento:** {step['thought']}")
+                    st.markdown(
+                        f"**Acao:** `{step['action']}` "
+                        f"com entrada: `{step['action_input'][:100]}`"
+                    )
+                    st.markdown(
+                        f"**Observacao:** {step['observation'][:300]}"
+                    )
+                    st.divider()
 
 # Input do chat
 if query := st.chat_input("Faca sua pergunta..."):
@@ -203,7 +230,8 @@ if query := st.chat_input("Faca sua pergunta..."):
             answer = "API offline. Inicie o backend com `python Programas/RAG/api.py`."
             st.error(answer)
             st.session_state.messages.append({"role": "assistant", "content": answer})
-        else:
+
+        elif modo_rag == "RAG Simples":
             with st.spinner("Consultando pipeline RAG..."):
                 try:
                     r = api_post("/ask", json={"query": query})
@@ -231,6 +259,64 @@ if query := st.chat_input("Faca sua pergunta..."):
                                 "role": "assistant",
                                 "content": answer,
                                 "sources": sources,
+                            }
+                        )
+                    else:
+                        err = f"Erro da API: {r.status_code}"
+                        st.error(err)
+                        st.session_state.messages.append(
+                            {"role": "assistant", "content": err}
+                        )
+                except requests.exceptions.ConnectionError:
+                    err = "Nao foi possivel conectar a API."
+                    st.error(err)
+                    st.session_state.messages.append(
+                        {"role": "assistant", "content": err}
+                    )
+                except Exception as e:
+                    err = f"Erro: {e}"
+                    st.error(err)
+                    st.session_state.messages.append(
+                        {"role": "assistant", "content": err}
+                    )
+
+        else:
+            # ── ReAct Agent ───────────────────────────────────────────────
+            with st.spinner("Agente ReAct raciocinando..."):
+                try:
+                    r = api_post("/ask-react", json={"query": query})
+                    if r.status_code == 200:
+                        data = r.json()
+                        answer = data["answer"]
+                        steps = data.get("steps", [])
+
+                        st.markdown(answer)
+
+                        if data.get("fallback_used"):
+                            st.warning(data["error"])
+
+                        if steps:
+                            with st.expander(
+                                "Raciocinio do Agente (ReAct)", expanded=True
+                            ):
+                                for i, step in enumerate(steps, 1):
+                                    st.markdown(f"**Passo {i}**")
+                                    st.markdown(f"**Pensamento:** {step['thought']}")
+                                    st.markdown(
+                                        f"**Acao:** `{step['action']}` "
+                                        f"com entrada: `{step['action_input'][:100]}`"
+                                    )
+                                    st.markdown(
+                                        f"**Observacao:** {step['observation'][:300]}"
+                                    )
+                                    st.divider()
+
+                        st.session_state.messages.append(
+                            {
+                                "role": "assistant",
+                                "content": answer,
+                                "steps": steps,
+                                "mode": "react",
                             }
                         )
                     else:

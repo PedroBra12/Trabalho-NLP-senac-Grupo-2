@@ -104,3 +104,7 @@ consegui fazer a interface do meu agente de respostas, usando o gradio, e ele es
 # 14/04/2026
 
 estudei um pouco sobre o fastAPI, pra que serve e como usava mas apesar de entender pra que serve usar sempre é mais complicado
+
+# 15/04/2026 
+
+consegui fazer a implantação do fastAPI no codigo e tava tentando fazer o react tb
