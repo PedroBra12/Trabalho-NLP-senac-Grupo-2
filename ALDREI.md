@@ -163,3 +163,6 @@ Tentando melhorar o modelo, na VM. Melhorando com modelos mais fortes.
 
 # 15 de abril de 2026
 Modelo melhorado com modelos mais fortes. Próxima aula fazer o streamlit + fast api
+
+# 16 de abril de 2026
+Fazendo o streamlit + fast api
