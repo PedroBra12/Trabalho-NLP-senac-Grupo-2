@@ -45,3 +45,8 @@ Busquei datasets diferentes porém não consegui baixar,
 ## 15/04/2026
 
 ### Feito FastApi com replit e ReAct
+
+## 23/04/2026
+
+### Código simples onde uso whisper medium para entender aúdios simples para ter um esqueleto de como usar as ferramentas novas para implantar no agente rag
+
