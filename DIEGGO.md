@@ -102,3 +102,6 @@ Testando modelos menores para poder rodar embedding de audio + habilidade de env
 
 ## 15 de abril de 2026
 Investigando docling e outras formas melhores de melhorar.
+
+## 28 de abril de 2026
+Depois de umas 2 semanas, finalmente essa versão nova funciona. Utilizando bge-m3 por ser capaz de embeddar de forma hibrida, diferente do serafim. Tambem trocei para usar o Qdrant, que é capaz de utilizar essa forma hibrida. Usando docling tambem, por ser capaz de ler todos, ate o momento, tipos de arquivo de NLP porém não testei as partes de audio. Proximos passos são testar parte de audio, abrir o gradio para internet e limpar o codigo que tem muitas partes não utilizadas.

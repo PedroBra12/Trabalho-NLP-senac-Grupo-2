@@ -1,9 +1,10 @@
-FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3.11 \
         python3.11-venv \
+        python3.11-dev \
         python3-pip \
         curl \
         git \
@@ -11,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg \
         libsm6 \
         libxext6 \
+        build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # pip into python3.11
@@ -26,7 +28,7 @@ RUN python3.11 -m pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-VOLUME ["/app/.chromadb", "/app/docs", "/root/.ollama"]
+VOLUME ["/app/.qdrant", "/app/docs", "/root/.ollama"]
 
 # Start Ollama automatically whenever a shell opens in the container
 RUN echo 'pgrep -x ollama > /dev/null || ollama serve &' >> ~/.bashrc

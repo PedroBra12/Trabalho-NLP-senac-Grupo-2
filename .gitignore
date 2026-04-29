@@ -1,6 +1,11 @@
 .venv/
+.qdrant/
+.vscode/
 .chromadb/
 .chromadb_lang/
+.devcontainer/
 __pycache__/
+docs/
 Programas/chroma_langchain_db/
 Programas/Professor/chroma_langchain_db/
+.env

@@ -1,5 +1,5 @@
 {
-  "name": "RAG Pipeline (LlamaIndex)",
+  "name": "RAG Pipeline (LlamaIndex + Qdrant)",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
@@ -8,10 +8,12 @@
     "--gpus",
     "all",
     "--shm-size",
-    "16g"
+    "16g",
+    "--env-file",
+    ".env"
   ],
   "mounts": [
-    "source=rag-chromadb,target=/app/.chromadb,type=volume",
+    "source=rag-qdrant,target=/app/.qdrant,type=volume",
     "source=rag-ollama,target=/root/.ollama,type=volume",
     "source=${localWorkspaceFolder}/PDFs,target=/app/docs,type=bind,consistency=cached"
   ],
@@ -41,6 +43,6 @@
       }
     }
   },
-  "postCreateCommand": "ollama serve & sleep 5 && ollama pull gemma4:e4b",
+  "postCreateCommand": "ollama serve & sleep 5 && ollama pull gemma4:e2b",
   "remoteUser": "root"
 }
