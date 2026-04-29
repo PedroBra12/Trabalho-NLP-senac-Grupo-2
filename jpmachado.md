@@ -112,3 +112,7 @@ consegui fazer a implantação do fastAPI no codigo e tava tentando fazer o reac
 # 23/04/2026
 
 consegui fazer funcionar o STT no meu modelo de RAG, a pergunta saiu "certinho", teve um erro, mas indiferente ele, e o modelo respondeu a pergunta bem
+
+# 28/04/2026
+
+não mexi em nada novo no codigo, so apenas estudei ele para tentar enetender e explicar amanha oque fiz e aprendi
