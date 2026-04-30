@@ -95,16 +95,18 @@ os.environ["HUGGING_FACE_HUB_TOKEN"] = os.environ.get("HF_TOKEN", "")
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
-EMBED_MODEL = "BAAI/bge-m3"
-SPARSE_MODEL = "Qdrant/bm42-all-minilm-l6-v2-attentions"
-RERANK_MODEL = "unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2"  # "BAAI/bge-reranker-v2-m3"
+EMBED_MODEL = "BAAI/bge-m3"  # PORTULAN/serafim-900m-portuguese-pt-sentence-encoder-ir
+SPARSE_DOC_MODEL = "naver/efficient-splade-VI-BT-large-doc"
+SPARSE_QUERY_MODEL = "naver/efficient-splade-VI-BT-large-query"
+RERANK_MODEL = "BAAI/bge-reranker-v2-m3"  # unicamp-dl/mMiniLM-L6-v2-en-pt-msmarco-v2
+WHISPER_MODEL = "openai/whisper-turbo"  # or "openai/whisper-large-v3"
 OLLAMA_MODEL = "gemma4:e2b"
 EMBED_DIM = 1024  # BGE-M3 dense output dim
 CHUNK_SIZE = 256
 CHUNK_OVERLAP = 64
-RETRIEVAL_K = 50  # dense candidates before RRF
-SPARSE_K = 50  # sparse candidates before RRF
-TOP_K = 20  # after reranker
+RETRIEVAL_K = 10  # dense candidates before RRF
+SPARSE_K = 10  # sparse candidates before RRF
+TOP_K = 5  # after reranker
 QDRANT_PATH = "./.qdrant"
 COLLECTION = "rag_docs"
 GOLDEN_PATH = Path(__file__).parent / "golden_qa.json"
@@ -148,11 +150,11 @@ Settings.embed_model = HuggingFaceEmbedding(
 Settings.llm = Ollama(
     model=OLLAMA_MODEL,
     request_timeout=600.0,
-    keep_alive="0",
+    keep_alive="10m",
     temperature=0.3,
-    context_window=4096,
+    context_window=2048,
     additional_kwargs={
-        "num_predict": 2000,
+        "num_predict": 512,
         "top_k": 40,
         "top_p": 0.9,
         "num_gpu": 35,  # adjust based on your GPU memory
@@ -255,10 +257,8 @@ def make_cpu_sparse_encoder(model_id: str):
 
 
 # Then pass directly to QdrantVectorStore
-_sparse_encoder = make_cpu_sparse_encoder("naver/efficient-splade-VI-BT-large-doc")
-_sparse_query_encoder = make_cpu_sparse_encoder(
-    "naver/efficient-splade-VI-BT-large-query"
-)
+_sparse_encoder = make_cpu_sparse_encoder(SPARSE_DOC_MODEL)
+_sparse_query_encoder = make_cpu_sparse_encoder(SPARSE_QUERY_MODEL)
 
 vector_store = QdrantVectorStore(
     client=qdrant_client,
@@ -321,10 +321,13 @@ _pdf_options.do_table_structure = True
 _pdf_options.table_structure_options = table_opts
 _pdf_options.accelerator_options = accel_opts
 
+_WHISPER_MAP = {
+    "openai/whisper-turbo": asr_model_specs.WHISPER_TURBO,
+    "openai/whisper-large-v3": asr_model_specs.WHISPER_LARGE,
+}
+
 _asr_options = AsrPipelineOptions()
-_asr_options.asr_options = (
-    asr_model_specs.WHISPER_TURBO
-)  # swap to WHISPER_LARGE_V3 for accuracy
+_asr_options.asr_options = _WHISPER_MAP[WHISPER_MODEL]
 
 _doc_converter = DocumentConverter(
     format_options={
@@ -485,7 +488,7 @@ def get_query_engine():
             text_qa_template=TEXT_QA_TEMPLATE,
         )
         hyde = HyDEQueryTransform(include_original=True)
-        #_query_engine = TransformQueryEngine(base_engine, hyde)
+        # _query_engine = TransformQueryEngine(base_engine, hyde)
         _query_engine = base_engine
     return _query_engine
 
