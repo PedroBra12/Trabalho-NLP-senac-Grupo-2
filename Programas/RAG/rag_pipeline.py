@@ -154,7 +154,7 @@ Settings.llm = Ollama(
     temperature=0.3,
     context_window=2048,
     additional_kwargs={
-        "num_predict": 512,
+        "num_predict": 2048,
         "top_k": 40,
         "top_p": 0.9,
         "num_gpu": 35,  # adjust based on your GPU memory
